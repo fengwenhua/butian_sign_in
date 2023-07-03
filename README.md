@@ -17,7 +17,10 @@ ql repo https://ghproxy.com/https://github.com/fengwenhua/butian_sign_in.git "bu
 
 `BUTIAN_COOKIE`值应该类似如下:
 
+![image](https://github.com/fengwenhua/butian_sign_in/assets/26518808/3b919d05-e0aa-455c-9ad6-2bce7963e6c2)
 
 
 `BUTIAN_TOKEN`值应该类似如下：
+
+![image](https://github.com/fengwenhua/butian_sign_in/assets/26518808/0480bea3-2b86-4872-a283-9217dce0ff70)
 
