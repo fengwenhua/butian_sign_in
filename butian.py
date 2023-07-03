@@ -6,6 +6,7 @@ new Env('butian');
 
 from sendNotify import send
 import requests
+import os
 from bs4 import BeautifulSoup
 requests.packages.urllib3.disable_warnings()
 
