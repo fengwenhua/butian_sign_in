@@ -11,6 +11,7 @@ import time
 from bs4 import BeautifulSoup
 requests.packages.urllib3.disable_warnings()
 
+timeout = 20  # 设置超时时间为20秒
 
 def start(cookie, token):
     max_retries = 20
@@ -44,7 +45,7 @@ def start(cookie, token):
             }
 
             res = requests.post(
-                'https://forum.butian.net/sign', headers=headers, data=data)
+                'https://forum.butian.net/sign', headers=headers, data=data, timeout=timeout)
             res_text = res.text
 
             success = False
@@ -86,15 +87,26 @@ def start(cookie, token):
                 print("等待20秒后进行重试...")
                 time.sleep(20)
 
+        except requests.Timeout:
+            # 当请求超时时的处理逻辑
+            print("[-] 请求超时，可能服务器有问题，1h后再说")
+            retries += 1
+            if retries >= max_retries:
+                print("[-]达到最大重试次数，签到失败。")
+                break
+            else:
+                print("[*] 等待1h秒后进行重试...")
+                time.sleep(3600)
+
         except Exception as e:
             print("签到失败，失败原因:"+str(e))
             send("butian 签到结果", str(e))
             retries += 1
             if retries >= max_retries:
-                print("达到最大重试次数，签到失败。")
+                print("[-] 达到最大重试次数，签到失败。")
                 break
             else:
-                print("等待20秒后进行重试...")
+                print("[*] 等待20秒后进行重试...")
                 time.sleep(20)
 
 
