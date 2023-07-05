@@ -46,6 +46,7 @@ def start(cookie, token):
 
             res = requests.post(
                 'https://forum.butian.net/sign', headers=headers, data=data, timeout=timeout)
+            print("[+] 返回值：", str(res.status_code))
             res_text = res.text
 
             success = False
@@ -75,16 +76,16 @@ def start(cookie, token):
                 msg += "[-] 未找到本次签到细节"
 
             if success:
-                print("签到结果: ", msg)
+                print("[+] 签到结果: ", msg)
                 send("butian 签到结果", msg)
                 break  # 成功执行签到，跳出循环
             elif retries >= max_retries:
-                print("达到最大重试次数，签到失败。")
+                print("[-] 达到最大重试次数，签到失败。")
                 send("butian 签到结果", msg)
                 break
             else:
                 retries += 1
-                print("等待20秒后进行重试...")
+                print("[*] 等待20秒后进行重试...")
                 time.sleep(20)
 
         except requests.Timeout:
@@ -99,7 +100,7 @@ def start(cookie, token):
                 time.sleep(3600)
 
         except Exception as e:
-            print("签到失败，失败原因:"+str(e))
+            print("[-] 签到失败，失败原因:"+str(e))
             send("butian 签到结果", str(e))
             retries += 1
             if retries >= max_retries:
