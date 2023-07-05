@@ -7,6 +7,7 @@ new Env('butian');
 from sendNotify import send
 import requests
 import os
+import time
 from bs4 import BeautifulSoup
 requests.packages.urllib3.disable_warnings()
 
@@ -57,7 +58,8 @@ def start(cookie, token):
                 success = True
                 # 已签到
             else:
-                print("[-] 未找到签到结果")
+                print("[-] 未找到签到结果, 返回内容如下：")
+                print(res_text)
                 msg += "[-] 未找到签到结果"
 
             sign_msg_element = soup.select_one('div#alert_message')
