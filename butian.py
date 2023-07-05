@@ -47,6 +47,12 @@ def start(cookie, token):
             res = requests.post(
                 'https://forum.butian.net/sign', headers=headers, data=data, timeout=timeout)
             print("[+] 返回值：", str(res.status_code))
+
+            if res.status_code == 419:
+                print('[-] cookie 过期了')
+                send("butian 签到结果", '[-] cookie 过期了')
+                break
+
             res_text = res.text
 
             success = False
