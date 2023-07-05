@@ -90,7 +90,7 @@ def start(cookie, token):
         except requests.Timeout:
             # 当请求超时时的处理逻辑
             print("[-] 请求超时，可能服务器有问题，1h后再说")
-            retries += 1
+            retries += 5
             if retries >= max_retries:
                 print("[-]达到最大重试次数，签到失败。")
                 break
